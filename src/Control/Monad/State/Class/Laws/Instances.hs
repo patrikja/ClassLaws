@@ -70,12 +70,12 @@ testLawsStatePartialS = do
   quickLawCheckPartial (undefined::MonadStatePutPut Bool (SS Bool))
   quickLawCheckPartial (undefined::MonadStatePutGet Bool (SS Bool))
   quickLawCheckPartial (undefined::MonadStateGetPut (SS Bool))
-  -- quickLawCheckPartial (undefined::MonadStateGetGet Bool Ordering (SS Bool))
+  quickLawCheckPartial (undefined::MonadStateGetGet Bool Ordering (SS Bool))
   quickLawCheckPartial (undefined::FunctorLaw1 () (SS Bool))
   quickLawCheckPartial (undefined::FunctorLaw2 Ordering Bool () (SS Bool))
-  -- quickLawCheckPartial (undefined::MonadLaw1 Bool () (SS Bool))
+  quickLawCheckPartial (undefined::MonadLaw1 Bool () (SS Bool))
   quickLawCheckPartial (undefined::MonadLaw2 Ordering (SS Bool))
-  -- quickLawCheckPartial (undefined::MonadLaw3 () Ordering Bool (SS Bool))
+  quickLawCheckPartial (undefined::MonadLaw3 () Ordering Bool (SS Bool))
   quickLawCheckPartial (undefined::FunctorMonadLaw () Ordering (SS Bool))
 
 main = do

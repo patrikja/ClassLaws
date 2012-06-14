@@ -248,16 +248,19 @@ type instance Param (State s a) = s
 
 ----------------------------------------------------------------------
 newtype SS s a = SS {unSS :: State s a}
-    deriving( Arbitrary, Show, ArbitraryPartial, MonadState s)
+    deriving( Arbitrary, Show, ArbitraryPartial, MonadState s
+            , SemanticEq, SemanticOrd)
+-- deriving instance (Show (Partial a), Show (Partial s), Bounded s, Enum s
+--                   , SemanticEq a, SemanticEq s) => TestEqual (SS s a)
 
 instance ( SemanticEq a, Show (Partial a)
          , SemanticEq s, Show (Partial s)
          , Bounded s, Enum s) => TestEqual (SS s a) where
   testEqual eq _ = testEqPartial (==!) (map unSS eq)
+
 instance (Enum s, Bounded s, Show (Partial a), Show (Partial s)) =>
     Show (Partial (SS s a)) where
         show (Partial (SS x)) = show (Partial x)
-
 
 
 instance Monad (SS s) where
