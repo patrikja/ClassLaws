@@ -65,7 +65,6 @@ testLawsStateS = do
   quickLawCheck (undefined::MonadLaw3 () Ordering Bool (SS Bool))
   quickLawCheck (undefined::FunctorMonadLaw () Ordering (SS Bool))
 
--- TODO: fix the class constraints problems (related to ChasingBottoms Data a => SemanticEq a instances)
 testLawsStatePartialS = do
   quickLawCheckPartial (undefined::MonadStatePutPut Bool (SS Bool))
   quickLawCheckPartial (undefined::MonadStatePutGet Bool (SS Bool))
