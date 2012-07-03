@@ -3,6 +3,7 @@
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE EmptyDataDecls #-}
 {-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 {- | This module implements the laws in Control.Monad, specified in
 the Haskell 2010 report, in 6.3.5 for Functor, in 6.3.6 for Monad, and
@@ -35,16 +36,18 @@ type instance LawArgs (FunctorLaw2 a b c f)  =  (b -> c, a -> b)
 type instance LawBody (FunctorLaw2 a b c f)  =  f a -> f c
 
 instance  (FunctorLaws f, TestEqual (f a -> f a)) =>  LawTest (FunctorLaw1 a f) where
---  lawtest _law =  testEqual . (functorLaw1 :: Law (FunctorLaw1 a f))
+  lawtest _law =  testEqual . (functorLaw1 :: Law (FunctorLaw1 a f))
+  -- Scoped type variables use to pass type information from _law to the rhs).
+
 --  lawtest _law =  testEqual . (functorLaw1 :: LawArgs (FunctorLaw1 a f) -> Equal (LawBody (FunctorLaw1 a f)))
-  lawtest _law =  testEqual . (functorLaw1 :: () -> Equal (f a -> f a))
+--  lawtest _law =  testEqual . (functorLaw1 :: () -> Equal (f a -> f a))
          
 -- type Law t  =  LawArgs t -> Equal (LawBody t)
                   
 instance  (FunctorLaws f, TestEqual (f a -> f c)) =>  LawTest (FunctorLaw2 a b c f) where
   lawtest _law =  testEqual . (functorLaw2 :: Law (FunctorLaw2 a b c f))
 
-type instance Param (a->b) = a
+-- type instance Param (a->b) = a
 
 
 data MonadLaw1 a b   (m :: * -> *)
