@@ -9,5 +9,5 @@ module Test.ClassLaws ( module Test.ClassLaws.Core
                       , module Test.QuickCheck) where
 import Test.ClassLaws.Core
 import Test.ClassLaws.TestingEquality
-import Test.ClassLaws.Partial hiding (Result)
+import Test.ClassLaws.Partial -- hiding (Result)
 import Test.QuickCheck 
