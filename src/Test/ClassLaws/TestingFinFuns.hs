@@ -46,27 +46,25 @@ arbitraryPartialFun :: forall e a.
   Gen a -> Gen (e -> a)
 arbitraryPartialFun ag = do
   funtab <- forM (bottom : enumElems :: [e]) (\_ -> ag)
-  genPartial 1 10 (return (table2fun funtab))
+  genPartial 1 6 (return (table2fun funtab))
 
 type FunTab e a = [a]
 
-table2fun :: (Enum e, Bounded e, SemanticOrd a) => 
-  FunTab e a -> (e -> a)
+table2fun ::  (Enum e, Bounded e, SemanticOrd a) => 
+              FunTab e a -> (e -> a)
 table2fun tab@(_:tottab) = fun
   where meet = lMeet tab
         fun x  | isBottom x  = meet 
-               | otherwise   = tail tottab !! (fromEnum x)
+               | otherwise   = tottab !! (fromEnum x)
 
 lMeet :: (SemanticOrd a) => [a] -> a
-lMeet []      =  bottom
-lMeet [x]     =  x
-lMeet (x:xs)  =  x /\! lMeet xs
+lMeet = foldr1 (/\!)
 
 ------------------------------------------------------------
 
-instance (Enum a, Bounded a, Show a, Show b) =>
-    Show (a->b) where
-        show = showFun
+instance  (Enum a, Bounded a, Show a, Show b) =>
+          Show (a->b) where
+  show = showFun
 
 instance  ( Enum e, Bounded e, Eq e                      
           , SemanticOrd s, ArbitraryPartial s            

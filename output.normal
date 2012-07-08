@@ -3,62 +3,62 @@
 +++ OK, passed 100 tests.
 +++ OK, passed 100 tests.
 *** Failed! Falsifiable (after 1 test):  
-(S <(False->((), True); True->((), True))>)
+(S <(False->((), True); True->((), False))>)
 False
-(1,<(_|_Bool_->(_|_()_, _|_Bool_); False->((), True); True->((), True))>,<(_|_Bool_->_|_P_; False->((), True); True->((), True))>)
+(1,<(_|_Bool_->(_|_()_, _|_Bool_); False->((), True); True->((), False))>,<(_|_Bool_->_|_P_; False->((), True); True->((), False))>)
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
+*** Failed! Falsifiable (after 1 test and 1 shrink):  
+(S <(False->(EQ, False); True->(LT, True))>)
+False
+(1,<(_|_Bool_->(_|_Ord_, _|_Bool_); False->(EQ, False); True->(LT, True))>,<(_|_Bool_->_|_P_; False->(EQ, False); True->(LT, True))>)
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
 +++ OK, passed 100 tests.
 +++ OK, passed 100 tests.
 *** Failed! Falsifiable (after 1 test):  
-(S <(False->(LT, False); True->(LT, False))>)
-False
-(1,<(_|_Bool_->(_|_Ord_, _|_Bool_); False->(LT, False); True->(LT, False))>,<(_|_Bool_->_|_P_; False->(LT, False); True->(LT, False))>)
+(S <(_|_Bool_->_|_P_; False->_|_P_; True->((), True))>)
+True
+(1,<(_|_Bool_->(_|_()_, _|_Bool_); False->(_|_()_, _|_Bool_); True->((), True))>,<(_|_Bool_->_|_P_; False->_|_P_; True->((), True))>)
++++ OK, passed 100 tests.
+*** Failed! Falsifiable (after 3 tests):  
+(True,<_bot_a->b_>)
+True
+(1,<(_|_Bool_->_|_P_; False->_|_P_; True->_|_P_)>,<_bot_a->b_>)
+*** Failed! Falsifiable (after 5 tests):  
+_|_St_
+True
+(1,<(_|_Bool_->(_|_Ord_, _|_Bool_); False->(_|_Ord_, _|_Bool_); True->(_|_Ord_, _|_Bool_))>,<_bot_a->b_>)
 +++ OK, passed 100 tests.
 +++ OK, passed 100 tests.
 +++ OK, passed 100 tests.
 +++ OK, passed 100 tests.
 +++ OK, passed 100 tests.
 +++ OK, passed 100 tests.
-*** Failed! Falsifiable (after 1 test):  
-(S <(_|_Bool_->(_|_()_, _|_Bool_); False->(_|_()_, True); True->_|_P_)>)
-False
-(1,<(_|_Bool_->(_|_()_, _|_Bool_); False->(_|_()_, True); True->(_|_()_, _|_Bool_))>,<(_|_Bool_->(_|_()_, _|_Bool_); False->(_|_()_, True); True->_|_P_)>)
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
++++ OK, passed 100 tests.
+*** Failed! Falsifiable (after 5 tests):  
+_|_St_
+_|_Bool_
+(1,(S <(_|_Bool_->_|_P_; False->_|_P_; True->_|_P_)>),_|_St_)
 +++ OK, passed 100 tests.
 *** Failed! Falsifiable (after 2 tests):  
-(True,<(_|_Bool_->(S <(_|_Bool_->(_|_()_, _|_Bool_); False->(_|_()_, _|_Bool_); True->_|_P_)>); False->(S <(_|_Bool_->(_|_()_, _|_Bool_); False->(_|_()_, False); True->_|_P_)>); True->_|_St_)>)
-False
-(1,<(_|_Bool_->_|_P_; False->_|_P_; True->_|_P_)>,<_bot_a->b_>)
-*** Failed! Falsifiable (after 1 test):  
-(S <(_|_Bool_->(_|_Ord_, _|_Bool_); False->(GT, True); True->_|_P_)>)
+(_|_Bool_,<_bot_a->b_>)
 True
-(1,<(_|_Bool_->(_|_Ord_, _|_Bool_); False->(GT, True); True->(_|_Ord_, _|_Bool_))>,<(_|_Bool_->(_|_Ord_, _|_Bool_); False->(GT, True); True->_|_P_)>)
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-+++ OK, passed 100 tests.
-*** Failed! Falsifiable (after 1 test):  
-_|_St_
-False
 (1,(S <(_|_Bool_->_|_P_; False->_|_P_; True->_|_P_)>),_|_St_)
-+++ OK, passed 100 tests.
-*** Failed! Falsifiable (after 1 test):  
-(True,<(_|_Bool_->(S <(_|_Bool_->_|_P_; False->((), _|_Bool_); True->_|_P_)>); False->(S <(_|_Bool_->_|_P_; False->((), False); True->_|_P_)>); True->_|_St_)>)
-False
-(1,(S <(_|_Bool_->_|_P_; False->_|_P_; True->_|_P_)>),_|_St_)
-*** Failed! Falsifiable (after 10 tests):  
+*** Failed! Falsifiable (after 5 tests):  
 _|_St_
-False
+_|_Bool_
 (1,(S <(_|_Bool_->_|_P_; False->_|_P_; True->_|_P_)>),_|_St_)
 +++ OK, passed 100 tests.
 +++ OK, passed 100 tests.
