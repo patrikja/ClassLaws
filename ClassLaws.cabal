@@ -30,7 +30,7 @@ description: The specification of a class in Haskell often starts with
   partially-defined values.  Using partially-defined values, we show
   that the standard lazy and strict implementations of the state monad
   do not satisfy the expected laws. More information can be found at
-  http://wiki.portal.chalmers.se/cse/pmwiki.php/FP/ClassLaws
+  <http://wiki.portal.chalmers.se/cse/pmwiki.php/FP/ClassLaws>.
 
 -- The license under which the package is released.
 license:             BSD3
