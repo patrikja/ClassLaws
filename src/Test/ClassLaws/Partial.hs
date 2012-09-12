@@ -6,6 +6,7 @@ module Test.ClassLaws.Partial
        ( module Test.ClassLaws.Partial
        , module Test.ChasingBottoms
        ) where
+-- A bug in ghc-7.2 complains about this part (re-export thinks Result still clashes)
 import Test.QuickCheck
 import Test.ChasingBottoms hiding (Result, listOf) -- clash with QuickCheck
 

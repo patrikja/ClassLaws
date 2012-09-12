@@ -10,7 +10,7 @@ name:                ClassLaws
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:             0.4.0.0
+version:             0.3.0.2
 
 -- A short (one-line) description of the package.
 synopsis:            Stating and checking laws for type class methods
@@ -30,7 +30,10 @@ description: The specification of a class in Haskell often starts with
   partially-defined values.  Using partially-defined values, we show
   that the standard lazy and strict implementations of the state monad
   do not satisfy the expected laws. More information can be found at
-  <http://wiki.portal.chalmers.se/cse/pmwiki.php/FP/ClassLaws>.
+  <http://wiki.portal.chalmers.se/cse/pmwiki.php/FP/ClassLaws>.  Built
+  with ghc-7.4.2 and ghc-7.6.1. (Fails to build with ghc-7.2.2 due to
+  http://hackage.haskell.org/trac/ghc/ticket/5745. Could be worked
+  around.)
 
 -- The license under which the package is released.
 license:             BSD3
