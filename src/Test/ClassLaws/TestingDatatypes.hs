@@ -28,6 +28,12 @@ type instance Param [a] = ()
 instance (Eq a, Show a) => TestEqual [a] where
   testEqual p _ = testEq (==) p
 
+-- Char
+type instance Param Char  =  ()
+
+instance TestEqual Char where
+  testEqual p _ = testEq (==) p
+
 -- Maybe
 type instance Param (Maybe a)  =  ()
 
