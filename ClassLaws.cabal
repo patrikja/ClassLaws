@@ -10,7 +10,7 @@ name:                ClassLaws
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:             0.3.0.2
+version:             0.3.1.0
 
 -- A short (one-line) description of the package.
 synopsis:            Stating and checking laws for type class methods
@@ -67,7 +67,8 @@ library
     Test.ClassLaws.TestingDatatypes, Test.ClassLaws.TestingState,
     Control.Monad.Laws, Control.Monad.Laws.Instances, 
     Control.Monad.State.Class.Laws, Control.Monad.State.Class.Laws.Instances, 
-    Data.Monoid.Laws, Data.Monoid.Laws.Instances
+    Data.Monoid.Laws, Data.Monoid.Laws.Instances,
+    Text.Show.Laws
   
     -- The Control.Monad and Data.Monoid laws should perhaps be split off  
     -- Some modules may be made internal 
