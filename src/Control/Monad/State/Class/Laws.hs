@@ -5,6 +5,7 @@
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE EmptyDataDecls #-}
+{-# LANGUAGE AllowAmbiguousTypes #-}
 
 -- | Laws for the 'MonadState' class. A submodule has a
 -- 'Control.Monad.State.Class.Laws.Instances.main' which runs quite a
@@ -34,13 +35,13 @@ data MonadStatePutGet s   (m :: * -> *)
 data MonadStateGetPut     (m :: * -> *)
 data MonadStateGetGet s a (m :: * -> *)
 
-type instance LawArgs (MonadStatePutPut s m)    =  (s, s) 
+type instance LawArgs (MonadStatePutPut s m)    =  (s, s)
 type instance LawBody (MonadStatePutPut s m)    =  m ()
 
 type instance LawArgs (MonadStatePutGet s m)    =  s
 type instance LawBody (MonadStatePutGet s m)    =  m s
 
-type instance LawArgs (MonadStateGetPut m)      =  () 
+type instance LawArgs (MonadStateGetPut m)      =  ()
 type instance LawBody (MonadStateGetPut m)      =  m ()
 
 type instance LawArgs (MonadStateGetGet s a m)  =  s -> s -> m a

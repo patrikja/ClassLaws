@@ -4,6 +4,7 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DeriveDataTypeable #-}
 
 -- | Implementations of the infrastructure needed to test state monad
 -- laws.
@@ -103,8 +104,8 @@ instance  (Enum s, Bounded s, Show a, Show s) =>
   show (S f) = "(S " ++ show f ++ ")"
 
 instance  ( ArbitraryPartial a, SemanticOrd a
-          , ArbitraryPartial s, SemanticOrd s 
-          , Enum s, Bounded s, Eq s 
+          , ArbitraryPartial s, SemanticOrd s
+          , Enum s, Bounded s, Eq s
           ) => ArbitraryPartial (State s a) where
   arbitraryPartial = genPartial 1 20 (liftM S arbitraryPartial)
 
@@ -137,7 +138,7 @@ instance (SemanticOrd a, SemanticOrd b) => SemanticOrd (Pair a b) where
         (True,  _,     _)     -> Just EQ
         (_,     True,  _)     -> Just LT
         (_,     _,     True)  -> Just GT
-        (_,     _,     _)     -> 
+        (_,     _,     _)     ->
             case (l == r) of
               True  -> l
               _     -> Nothing
@@ -174,7 +175,7 @@ pairRecPatt opA opB topOp px py = topOp (opA (fstP px) (fstP py)) (opB (sndP px)
 instance (Enum a, Bounded a, Eq a, Eq b) => Eq (State a b) where
   (==) x y = eqPartial q x y
     where q = statePatt (==) x y
-    
+
 instance (Enum a, Bounded a, SemanticEq a, SemanticEq b) => SemanticEq (State a b) where
     semanticEq tweak x y = eqPartial q x y
         where q = statePatt (semanticEq tweak) x y
@@ -201,19 +202,21 @@ instance (Enum a, Bounded a, SemanticOrd a, SemanticOrd b) => SemanticOrd (State
 statePatt op (S f1) (S f2) = op f1 f2
 
 ------------------------------------------------------------
+data Three = Zero3 | One3 | Two3
+  deriving (Eq, Enum, Ord, Bounded, Show, Data, Typeable)
 
-instance Arbitrary Ordering where
+instance Arbitrary Three where
     arbitrary = enumTotArb $ zip [1,1,1] $ enumElems
 
-instance CoArbitrary Ordering where
+instance CoArbitrary Three where
     coarbitrary = coarbitrary . fromEnum
 
-instance ArbitraryPartial Ordering where
+instance ArbitraryPartial Three where
     arbitraryPartial = genPartial 1 9 $ enumTotArb $
                        zip [1,1,1] $ enumElems
 
-instance Show (Partial Ordering) where
-    show = enumShowBot_auxLst ["Ord", "LT", "EQ", "GT"] . unPartial
+instance Show (Partial Three) where
+    show = enumShowBot_auxLst ["Three", "0", "1", "2"] . unPartial
 
 enumTotArb :: [(Int,a)] -> Gen a
 enumTotArb as = frequency $ map (\(f,a) -> (f,return a)) as
@@ -265,7 +268,7 @@ instance (Enum s, Bounded s, Show (Partial a), Show (Partial s)) =>
 
 instance Monad (SS s) where
   return        =  SS . returnState
-  (SS m) >>= k  =  bindSS 
+  (SS m) >>= k  =  bindSS
       where
         bindSS = SS $ S $ \s -> case runS m s of
                                   (Pair a s') -> x s'

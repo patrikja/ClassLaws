@@ -2,13 +2,13 @@
 -- | This module collects the infrastructure used to easily switch
 -- between testing ClassLaws with or without partial values. Built
 -- around QuickCheck and ChasingBottoms.
-module Test.ClassLaws.Partial 
+module Test.ClassLaws.Partial
        ( module Test.ClassLaws.Partial
        , module Test.ChasingBottoms
        ) where
 -- A bug in ghc-7.2 complains about this part (re-export thinks Result still clashes)
 import Test.QuickCheck
-import Test.ChasingBottoms hiding (Result, listOf) -- clash with QuickCheck
+import Test.ChasingBottoms hiding (Result, listOf, infiniteListOf) -- clash with QuickCheck
 
 import Data.List (intersperse)
 import Control.Monad (liftM2, liftM3)
@@ -47,7 +47,7 @@ instance ( ArbitraryPartial a
   propertyPartial f = forAllShrink arb shr prop
       where
         arb               = fmap Partial arbitraryPartial
-        shr  (Partial x)  = map  Partial (shrinkPartial x) 
+        shr  (Partial x)  = map  Partial (shrinkPartial x)
         prop (Partial x)  = propertyPartial (f x)
 
 --------------------------------------------------------------
@@ -91,8 +91,8 @@ instance ArbitraryPartial () where
 
 instance (Show (Partial a), Show (Partial b)) => Show (Partial (a,b)) where
   show = showPartial "(,)" showPair
-    where showPair (Partial (a,b)) = 
-            "(" ++ show (Partial a) ++ "," 
+    where showPair (Partial (a,b)) =
+            "(" ++ show (Partial a) ++ ","
                 ++ show (Partial b) ++ ")"
 
 instance (ArbitraryPartial a, ArbitraryPartial b) => ArbitraryPartial (a,b) where
@@ -100,9 +100,9 @@ instance (ArbitraryPartial a, ArbitraryPartial b) => ArbitraryPartial (a,b) wher
 
 instance (Show (Partial a), Show (Partial b), Show (Partial c)) => Show (Partial (a,b,c)) where
   show = showPartial "(,)" showTriple
-    where showTriple (Partial (a,b,c)) = 
-            "(" ++ show (Partial a) ++ "," 
-                ++ show (Partial b) ++ "," 
+    where showTriple (Partial (a,b,c)) =
+            "(" ++ show (Partial a) ++ ","
+                ++ show (Partial b) ++ ","
                 ++ show (Partial c) ++ ")"
 
 instance (ArbitraryPartial a, ArbitraryPartial b, ArbitraryPartial c) => ArbitraryPartial (a,b,c) where

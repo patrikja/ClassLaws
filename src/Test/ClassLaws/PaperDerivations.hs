@@ -3,7 +3,7 @@ import Test.ClassLaws.TestingState
 import Test.ChasingBottoms (SemanticEq, (==!), isBottom, bottom)
 
 {-
-import Control.Monad.Laws 
+import Control.Monad.Laws
   ( MonadLaws(..), FunctorLaws(..), FunctorMonadLaws
   , defaultFunctorLaw1
   , MonadLaw1, MonadLaw2, MonadLaw3
@@ -16,13 +16,13 @@ import Test.ClassLaws.TestingEquality
    (TestEqual(testEqual), testEqPartial)
 -}
 
-fLaw1eeL = 
+fLaw1eeL =
     [ fmap id (bottom :: State Bool ())
     , -- definition of fmap
-      S $ \s -> let  Pair a s' = runS bottom s 
+      S $ \s -> let  Pair a s' = runS bottom s
                 in   Pair a s'
     , -- apply runS
-      S $ \s -> let  Pair a s' = bottom 
+      S $ \s -> let  Pair a s' = bottom
                 in   Pair a s'
     , -- let reduction
       S $ \s -> Pair bottom bottom
@@ -33,19 +33,19 @@ fLaw1eeL =
     , -- apply id
       id bottom
     ]
-     
-fLaw1reL = 
+
+fLaw1reL =
     [
      (bottom:: Bool -> Pair () Bool) True
     , -- ===  -- apply bottom
      bottom:: Pair () Bool
-    , -- ** ==/= 
+    , -- ** ==/=
      Pair (bottom:: ()) (bottom:: Bool)
     , -- ===  -- beta reduction
      (\s -> Pair (bottom:: ()) (bottom:: Bool)) True
     ]
 
-fLaw1eeS = 
+fLaw1eeS =
     [
       fmap id (bottom:: SS Bool ())
     , -- ===  -- definition of fmap
@@ -62,7 +62,7 @@ fLaw1eeS =
       id (bottom:: SS Bool ())
     ]
 
-mLaw1eeS = let k = const bottom in 
+mLaw1eeS = let k = const bottom in
     [
       return False >>= k
     , -- ===  -- definition of bind
@@ -83,14 +83,14 @@ mLaw1eeS = let k = const bottom in
       SS $ S $ \s ->  (runS.unSS) (bottom::SS Bool ()) s
     , -- ===  -- apply runS
       SS $ S $ \s ->  bottom::Pair () Bool
-    , -- ** ==/= 
+    , -- ** ==/=
       bottom::SS Bool ()
     , -- ===  -- apply k
       k False
     ]
 
 
-mLaw1eeL = let k = bottom::Bool -> State Bool () in 
+mLaw1eeL = let k = bottom::Bool -> State Bool () in
     [
       return False >>= k
     , -- ===  -- definition of bind
@@ -111,7 +111,7 @@ mLaw1eeL = let k = bottom::Bool -> State Bool () in
       S $ \s ->  runS (bottom::State Bool ()) s
     , -- ===  -- apply runS
       S $ \s ->  bottom::Pair () Bool
-    , -- ** ==/= 
+    , -- ** ==/=
       bottom::State Bool ()
     , -- ===  -- apply k
       k False
@@ -121,38 +121,38 @@ mLaw2reL =
     [
       runS (m >>= return) bottom
     , -- ===
-      Pair (bottom::Ordering) (bottom::Bool)
+      Pair (bottom::Three) (bottom::Bool)
     , -- ** ==/=
-      bottom::Pair Ordering Bool
+      bottom::Pair Three Bool
     , -- ===
       runS m bottom
     ]
-  where m = bottom :: State Bool Ordering
+  where m = bottom :: State Bool Three
 
 mLaw2eeL =
     [
      m >>= return
     , -- ===
-     S $ const (Pair (bottom::Ordering) (bottom::Bool))
+     S $ const (Pair (bottom::Three) (bottom::Bool))
     , -- ** ==/=
-     bottom :: State Bool Ordering
+     bottom :: State Bool Three
     , -- ===
      m
     ]
-  where m = bottom :: State Bool Ordering
+  where m = bottom :: State Bool Three
 
 
 mLaw2eeS =
     [
      m >>= return
     , -- ===
-     SS $ S $ const (bottom :: Pair (Ordering) (Bool))
+     SS $ S $ const (bottom :: Pair (Three) (Bool))
     , -- ** ==/=
-     bottom :: SS Bool Ordering
+     bottom :: SS Bool Three
     , -- ===
      m
     ]
-  where m = bottom :: SS Bool Ordering
+  where m = bottom :: SS Bool Three
 
 main = do
     printResults $ runSteps fLaw1eeL
