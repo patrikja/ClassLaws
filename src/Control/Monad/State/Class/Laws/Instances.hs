@@ -29,6 +29,8 @@ instance FunctorLaws       (SS s)
 instance FunctorMonadLaws  (SS s)
 ----------------------------------------------------------------------
 
+-- NOTE: This module has moved to test/Main.hs and only remains here in case somebody depends on it.
+
 testLawsStateL = do
   quickLawCheck (undefined::MonadStatePutPut Bool (State Bool))
   quickLawCheck (undefined::MonadStatePutGet Bool (State Bool))
