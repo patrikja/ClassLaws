@@ -1,15 +1,11 @@
-default: output.pedantic output.normal
+default: test/output.pedantic test/output.normal
 
-output.pedantic:
-	find . -name '*.hi' -exec rm {} \;
-	find . -name '*.o'  -exec rm {} \;
-	ghc -fpedantic-bottoms -isrc -main-is Control.Monad.State.Class.Laws.Instances.main --make src/Control/Monad/State/Class/Laws/Instances \
-          -o test.pedantic 
-	./test.pedantic > output.pedantic
+install:
+	cabal sandbox init
+	cabal install
 
-output.normal:
-	find . -name '*.hi' -exec rm {} \;
-	find . -name '*.o'  -exec rm {} \;
-	ghc                    -isrc -main-is Control.Monad.State.Class.Laws.Instances.main --make src/Control/Monad/State/Class/Laws/Instances \
-          -o test.normal
-	./test.normal > output.normal
+test/output.pedantic: install
+	cabal run test.pedantic > test/output.pedantic
+
+test/output.normal: install
+	cabal run test.normal > test/output.normal

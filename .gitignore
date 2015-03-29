@@ -1,2 +1,7 @@
 dist
 cabal-dev
+*~
+cabal.sandbox.config
+test/output.normal
+test/output.pedantic
+.cabal-sandbox
