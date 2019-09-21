@@ -127,6 +127,9 @@ testMonadState
        quickFLawCheck (undefined::MonadLaw2      Int (State Bool)) -- necessary because of Show State problem
        quickFLawCheck (undefined::MonadLaw3 Int Bool Char (State Bool))
 
+instance Applicative MyList where
+  pure = return
+  (<*>) = ap
 
 instance  Monad MyList  where
     m >>= k             = foldrMyList ((+++) . k) Nil m

@@ -19,9 +19,6 @@ instance (Eq ( a), Show (Partial a)) => TestEqual (Endo a) where
    testEqual = testRunEqPartial appEndo (==)
 -}
 
-instance (Arbitrary a, CoArbitrary a) => Arbitrary (Endo a) where
-  arbitrary = liftM Endo arbitrary
-
 -- | For lists, no 'Param'eter is needed, so we use @()@.
 type instance Param [a] = ()
 

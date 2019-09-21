@@ -8,7 +8,7 @@
 -- hierarchy: 'Data.Monoid.Laws.defaultMonoidLaw1' etc.
 module Data.Monoid.Laws.Instances where
 
-import Data.Monoid	(Monoid(mappend, mempty), Endo(Endo), appEndo)
+import Data.Monoid      (Monoid(mappend, mempty), Endo(Endo), appEndo)
 import Data.Monoid.Laws (MonoidLaws(..), MonoidLaw1, MonoidLaw2, MonoidLaw3)
 
 import Test.ClassLaws   ( Equal, Law, quickLawCheck, lawtest, Property, quickCheck
@@ -62,9 +62,12 @@ testMonoidEndoPartial = do
 The following Monoid instance for MyList does *not* satisfy the Monoid laws.
 -}
 
+instance Semigroup (MyList a) where
+  xs <> ys  =  xs +++ ys +++ xs
+
 instance Monoid (MyList a) where
-  mempty         =  Nil
-  mappend xs ys  =  xs +++ ys +++ xs
+  mempty  = Nil
+  mappend = (<>)
 
 instance MonoidLaws (MyList a)
 

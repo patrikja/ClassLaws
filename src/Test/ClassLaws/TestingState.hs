@@ -29,7 +29,7 @@ import Test.ClassLaws.TestingEquality
 import Test.ClassLaws.TestingFinFuns
 
 import Control.Monad.State.Class(MonadState(..))
-import Control.Monad (liftM, liftM2)
+import Control.Monad (liftM, liftM2, ap)
 
 import Data.Data
 
@@ -234,6 +234,10 @@ instance Monad (State s) where
   return  =  returnState
   (>>=)   =  bindStateL
 
+instance Applicative (State s) where
+  pure = return
+  (<*>) = ap
+
 instance Functor (State s) where
   fmap    =  fmapStateL
 
@@ -265,6 +269,9 @@ instance (Enum s, Bounded s, Show (Partial a), Show (Partial s)) =>
     Show (Partial (SS s a)) where
         show (Partial (SS x)) = show (Partial x)
 
+instance Applicative (SS s) where
+  pure = return
+  (<*>) = ap
 
 instance Monad (SS s) where
   return        =  SS . returnState
