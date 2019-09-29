@@ -8,7 +8,7 @@ module Test.ClassLaws.Partial
        ) where
 -- A bug in ghc-7.2 complains about this part (re-export thinks Result still clashes)
 import Test.QuickCheck
-import Test.ChasingBottoms hiding (Result, listOf, infiniteListOf) -- clash with QuickCheck
+import Test.ChasingBottoms hiding (Result, listOf, infiniteListOf, function) -- clash with QuickCheck
 
 import Data.List (intersperse)
 import Control.Monad (liftM2, liftM3)

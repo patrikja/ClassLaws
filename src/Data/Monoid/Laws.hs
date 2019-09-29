@@ -3,11 +3,11 @@
 
 -- | ClassLaws for the 'Monoid' class. Actual tests are defined in the Instances submodule and can be run from 'Data.Monoid.Laws.Instances.main'.
 module Data.Monoid.Laws where
-import Data.Monoid	
+import Data.Monoid
 import Test.ClassLaws
 
-data MonoidLaw1 m 
-data MonoidLaw2 m 
+data MonoidLaw1 m
+data MonoidLaw2 m
 data MonoidLaw3 m
 
 class Monoid m => MonoidLaws m where
@@ -21,8 +21,8 @@ class Monoid m => MonoidLaws m where
   monoidLaw3  =  defaultMonoidLaw3
 
 defaultMonoidLaw1 m           =                               m  =.=  m `mappend` mempty
-defaultMonoidLaw2 m           =              m `mappend` mempty  =.=  m 
-defaultMonoidLaw3 (m1,m2,m3)  =  m1 `mappend` (m2 `mappend` m3)  =.=  (m1 `mappend` m2) `mappend` m3   
+defaultMonoidLaw2 m           =              m `mappend` mempty  =.=  m
+defaultMonoidLaw3 (m1,m2,m3)  =  m1 `mappend` (m2 `mappend` m3)  =.=  (m1 `mappend` m2) `mappend` m3
 
 type instance LawArgs (MonoidLaw1 m)  =  m
 type instance LawBody (MonoidLaw1 m)  =  m
